@@ -1,21 +1,22 @@
 import requests
 
-#todo get data from server
-#todo make request(probably with 'requests')
-#todo store JSON data retrieved from request
-#todo get the data needed from JSON ('requests' has parser for JSON to Python Dictionary)
-#todo handle errors(access denied, no network connection, invalid response)
-
+#my unique access code to request information from the api
 key = 'dec8a2ab'
-
+#url of the api that I am requesting information from
 base_url = 'http://www.omdbapi.com/'
-
-movie = input('What movie name?')
-
-params = { 'apikey' : key, 't' : movie }
-data = requests.get(base_url, params ).json()
-
+#name of a movie to search for
+movieName = input('What movie would you like to search for?\n')
+#provide apikey to get access
+#'t' is in api documentation: searches movies by name
+params = {'apikey': key, 't': movieName}
+#request a json object containing info from the movie
+#store the json object to display it or get specific information from it
+data = requests.get(base_url, params).json()
+#view all data in json object
+print('data:')
 print(data)
-
-print("Rating for that movie: ")
+#show rating information
+print("Ratings: ")
 print(data['Ratings'][0]['Value'])
+print("Metascore: ")
+print(data['Metascore'])
